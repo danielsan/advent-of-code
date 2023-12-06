@@ -2,26 +2,31 @@
 import fs from 'node:fs/promises'
 
 async function main () {
+  console.time('readFile')
   const fileString = (await fs.readFile(process.argv[2], 'utf8')).toString()
   const rawLines = fileString.trim().split('\n')
+  console.timeEnd('readFile')
 
-  const map = new Map(rawLines.map(line => line.split(':')))
-  const times = [+map.get('Time').trim().replace(/\D+/g, '')]
-  const distances = [+map.get('Distance').trim().replace(/\D+/g, '')]
-  const results = new Array(times.length).fill(0)
+  const [time, distance] = rawLines.map(line => +line.replace(/\D+/g, ''))
+  let diff = time
 
-  console.log({ times, distances })
+  console.log({ time, distance })
+  console.time('loops')
+  for (let j = 1; j < time; j++) {
+    if (((time - j) * j) > distance) break
 
-  for (let i = 0; i < times.length; i++) {
-    for (let j = 1; j < times[i]; j++) {
-      const xdistance = (times[i] - j) * j
-      if (xdistance > distances[i]) {
-        results[i]++
-      }
-    }
+    diff--
   }
 
-  console.log({ results, total: results.reduce((a, b) => a * b, 1) })
+  for (let j = time; j--;) {
+    if (((time - j) * j) > distance) break
+
+    diff--
+  }
+
+  console.timeEnd('loops')
+
+  console.log({ diff, loops: time - diff, ratio: (time - diff) / time })
 }
 
 main()
