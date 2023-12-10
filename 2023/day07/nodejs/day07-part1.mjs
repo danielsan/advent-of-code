@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises'
 
-const cardList = 'AKQJT98765432'.split('').reverse().join('')
-console.log({ cardList })
-
 const handsOrder = [
   '11111', // Five of a kind
   '2111', // Four of a kind
@@ -56,7 +53,7 @@ async function main () {
   const total = sorted.reduce((acc, o, i) => {
     const pos = i + 1
     acc += (o.rankBidFactor = o.bid * pos)
-    console.log(`${o.hand} ${o.bid} * ${pos} = ${o.rankBidFactor}`)
+    // console.log(`${o.hand} ${o.bid} * ${pos} = ${o.rankBidFactor}`)
 
     return acc
   }, 0)
