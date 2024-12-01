@@ -130,3 +130,5 @@ dist
 .pnp.*
 my-code.ownerproof
 **/inputs/real-input*
+**/real-input*
+**/target/**
