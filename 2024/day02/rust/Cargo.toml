@@ -3,4 +3,16 @@ name = "aoc-2024-day02"
 version = "0.1.0"
 edition = "2021"
 
+[[bench]]
+name = "my_benchmark"
+harness = false
+
+[[bench]]
+name = "example"
+harness = false
+
 [dependencies]
+
+[dev-dependencies]
+bencher = "0.1.5"
+criterion = { version = "2.7.2", package = "codspeed-criterion-compat" }
