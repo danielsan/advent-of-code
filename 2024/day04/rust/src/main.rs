@@ -87,8 +87,6 @@ fn aoc_2024_day04_part1 (content: &str) -> usize {
             if word_b == "MAS" { 1 } else { 0 } +
             if word_c == "MAS" { 1 } else { 0 } +
             if word_d == "MAS" { 1 } else { 0 };
-
-        // println!("a:{} b:{} c:{} d:{} ", word_a, word_b, word_c, word_d);
     }
 
     total
@@ -97,7 +95,6 @@ fn aoc_2024_day04_part1 (content: &str) -> usize {
 fn aoc_2024_day04_part2 (content: &str) -> usize {
     let content = content.trim();
     let num_of_cols = 1 + content.find("\n").expect("Should find \\n in content &str");
-    let mut total = 0;
 
     content.chars().into_iter().enumerate().fold(0, |total, (x_pos, x)| {
         if x != 'A' { return total }
